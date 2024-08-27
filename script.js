@@ -34,3 +34,17 @@ function operate(op, a, b) {
             break;
     }
 }
+
+const numbers = document.querySelectorAll(".number");
+numbers.forEach(button => {
+    button.addEventListener("click", function (e) {
+        console.log(e.target.textContent);
+    });
+});
+
+const operators = document.querySelectorAll(".operator");
+operators.forEach(button => {
+    button.addEventListener("click", function (e) {
+        console.log(e.target.textContent);
+    })
+});
