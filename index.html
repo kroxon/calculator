@@ -6,11 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="script.js" defer></script>
 </head>
 
 <body>
-
+    <div class="device">
+        <div class="display">
+            <div class="support">123 ÷ </div>
+            <div class="main">1234567890</div>
+        </div>
+        <div class="buttons-row">
+            <div class="wide">
+                <button id="ac">AC</button>
+            </div>
+            <div class="wide">
+                <button id="backspace"><i id="backspace-icon" class="material-icons">backspace</i></button>
+                <button class="operator">÷</button>
+            </div>
+        </div>
+        <div class="buttons-row">
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            <button class="operator"></button>
+        </div>
+        <div class="buttons-row">
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            <button class="operator">-</button>
+        </div>
+        <div class="buttons-row">
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>
+            <button class="operator">+</button>
+        </div>
+        <div class="buttons-row">
+            <div class="wide">
+                <button class="number">0</button>
+            </div>
+            <div class="wide">
+                <button class="number">.</button>
+                <button class="operator">=</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

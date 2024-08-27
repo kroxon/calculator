@@ -1,0 +1,59 @@
+.device {
+    background-color: chocolate;
+    display: flex;
+    flex-direction: column;
+    height: 550px;
+    width: 400px;
+    margin: 200px auto auto auto;
+}
+
+.display {
+    display: flex;
+    flex-grow: 1;
+    font-size: 3rem;
+    display: inline-block;
+    text-align: right;
+    align-content: end;
+    background-color: white;
+    margin: 8px;
+    padding: 0 8px;
+}
+
+.support {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.buttons-row {
+    display: flex;
+    flex-grow: 1;
+    gap: 8px;
+    margin: 0 8px 8px 8px;
+}
+
+button {
+    display: flex;
+    flex-grow: 1;
+    width: 50%;
+    font-size: 3rem;
+    display: inline-block;
+}
+
+.wide {
+    display: flex;
+    flex-grow: 1;
+    width: 50%;
+    gap: 8px;
+}
+ i#backspace-icon.material-icons {
+    display: block;
+    color: blue;
+    font-size: 2rem;
+    margin-top: auto;
+ }
+
+ button#backspace {
+    display: flex;
+    flex-grow: 1;
+    display: inline-block;
+}
