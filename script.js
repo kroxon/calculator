@@ -67,7 +67,12 @@ function updateSupportDisplay(text) {
 }
 
 function backspace() {
-    // to do
+    // to do manage operator
+    let input = getDisplay();
+    input = input.slice(0, -1);
+    if (input.length == 0)
+        input = "0";
+    bigDisplay.textContent = input;
     console.log("backspace to do");
 }
 
