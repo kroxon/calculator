@@ -24,14 +24,20 @@ function operate() {
     }
 }
 
-function updateOperator(operator) {
+function updateOperator(op) {
+    operator = op;
     updateNumberA()
-    smallDisplay.textContent = `${firstNumber} ${operator}`;
+    let input = getDisplay();
+    if (input.includes(" "))
+        input = input.slice(0, input.indexOf(" "));
+    bigDisplay.textContent = input + " " + operator;
+
     // to do
     console.log("updateOperator to do");
 }
 
 function updateNumberA() {
+    numberA = getDisplay().slice(0, getDisplay().indexOf(" "));
     // to do
     console.log("updateNumberA to do");
 }
@@ -69,9 +75,13 @@ function updateSupportDisplay(text) {
 function backspace() {
     // to do manage operator
     let input = getDisplay();
-    input = input.slice(0, -1);
-    if (input.length == 0)
-        input = "0";
+    if (input.includes(" ")) {
+        input = input.slice(0, input.indexOf(" "));
+    } else {
+        input = input.slice(0, -1);
+        if (input.length == 0)
+            input = "0";
+    }
     bigDisplay.textContent = input;
     console.log("backspace to do");
 }
