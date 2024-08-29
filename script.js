@@ -26,6 +26,7 @@ function operate() {
             result = numberA / numberB;
             break;
     }
+    result = formatResult(result);
 }
 
 function updateOperator(operator) {
@@ -44,7 +45,7 @@ function updateOperator(operator) {
         } else if (numberA != null && input === "") {
             firstOperator = operator;
             updateSupportDisplay();
-        } else if (numberA == null) {
+        } else if (numberA == null && input !== "0") {
             updateNumberA();
             firstOperator = operator;
             clearBigDisplay();
@@ -56,7 +57,7 @@ function updateOperator(operator) {
             numberA = null;
             firstOperator = "";
             updateSupportDisplay();
-        } else if (numberA != null && input != "") {
+        } else if (numberA != null) {
             updateNumberB();
             operate();
             bigDisplay.textContent = result;
@@ -68,20 +69,17 @@ function updateOperator(operator) {
         }
     }
 
-    console.log("updateOperator to do");
 }
 
 
 function updateNumberA() {
     numberA = getDisplay();
-    // to do
-    console.log("updateNumberA to do: " + numberA);
+    if (numberA.endsWith("."))
+        numberA = numberA.slice(0, -1);
 }
 
 function updateNumberB() {
     numberB = getDisplay();
-    // to do
-    console.log("updateNumberB to do: " + numberB);
 }
 
 function getDisplay() {
@@ -100,7 +98,6 @@ function updateMainDisplay(symbol) {
     else
         if (input.length < 11)
             bigDisplay.textContent = input + symbol;
-    console.log("updateMainDisplay: " + getDisplay());
 }
 
 function updateSupportDisplay(text) {
@@ -108,21 +105,19 @@ function updateSupportDisplay(text) {
         smallDisplay.textContent = numberA + " " + firstOperator;
     else
         clearSmallDisplay();
-    console.log("updateSupportDisplay to do");
 }
 
 function backspace() {
-    // to do manage operator
     let input = getDisplay();
-    if (input.includes(" ")) {
-        input = input.slice(0, input.indexOf(" "));
-    } else {
+
+    if (input.includes("e"))
+        input = input.slice(0, input.indexOf("e"));
+    else
         input = input.slice(0, -1);
-        if (input.length == 0)
-            input = "0";
-    }
+    if (input.length == 0)
+        input = "0";
+
     bigDisplay.textContent = input;
-    console.log("backspace to do");
 }
 
 function clearDisplays() {
@@ -143,19 +138,29 @@ function clearSmallDisplay() {
     smallDisplay.textContent = "";
 }
 
+function formatResult(number) {
+    let resultString = number.toString();
+
+    if (resultString.length > 12) {
+        if (Math.floor(number).toString().length >= 12) {
+            return number.toExponential(5);
+        } else {
+            return Number(number.toPrecision(12)).toString();
+        }
+    }
+    return resultString;
+}
+
 const buttons = document.querySelectorAll("button");
 buttons.forEach(button => {
     button.addEventListener("click", function (e) {
         if (e.target.className === 'number') {
-            console.log(e.target.textContent + " number");
             updateMainDisplay(e.target.textContent);
         }
         else if (e.target.className === 'operator') {
-            console.log(e.target.textContent + " operator");
             updateOperator(e.target.textContent);
         }
         else {
-            console.log(e.target.textContent + " action");
             if (e.target.textContent === "AC") {
                 clearDisplays();
             }
@@ -165,5 +170,3 @@ buttons.forEach(button => {
         }
     })
 });
-
-getDisplay();
