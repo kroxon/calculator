@@ -22,11 +22,13 @@
 .support {
     font-size: 2rem;
     margin: 0;
+    height: 30px;
     display: block;
 }
 
 .main {
     display: block;
+    height: 50px;
 }
 
 .buttons-row {

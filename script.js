@@ -1,14 +1,18 @@
 
-let numberA = 0;
-let numberB = 0;
-let result = 0;
-let operator = "+";
+let numberA = null;
+let numberB = null;
+let result = null;
+let firstOperator = "";
+let secondOperator = "";
 
 const bigDisplay = document.querySelector(".main");
 const smallDisplay = document.querySelector(".support");
 
 function operate() {
-    switch (operator) {
+    numberA = parseFloat(numberA) || 0;
+    numberB = parseFloat(numberB) || 0;
+
+    switch (firstOperator) {
         case '+':
             result = numberA + numberB;
             break;
@@ -24,27 +28,60 @@ function operate() {
     }
 }
 
-function updateOperator(op) {
-    operator = op;
-    updateNumberA()
+function updateOperator(operator) {
     let input = getDisplay();
-    if (input.includes(" "))
-        input = input.slice(0, input.indexOf(" "));
-    bigDisplay.textContent = input + " " + operator;
 
-    // to do
+    if (operator !== "=") {
+        if (numberA != null && input !== "") {
+            updateNumberB();
+            operate();
+            firstOperator = operator;
+            numberA = result;
+            result = null;
+            numberB = null;
+            clearBigDisplay();
+            updateSupportDisplay();
+        } else if (numberA != null && input === "") {
+            firstOperator = operator;
+            updateSupportDisplay();
+        } else if (numberA == null) {
+            updateNumberA();
+            firstOperator = operator;
+            clearBigDisplay();
+            updateSupportDisplay();
+        }
+    } else if (operator === "=") {
+        if (numberA != null && input === "") {
+            bigDisplay.textContent = numberA;
+            numberA = null;
+            firstOperator = "";
+            updateSupportDisplay();
+        } else if (numberA != null && input != "") {
+            updateNumberB();
+            operate();
+            bigDisplay.textContent = result;
+            numberA = null;
+            numberB = null;
+            result = null;
+            firstOperator = "";
+            updateSupportDisplay();
+        }
+    }
+
     console.log("updateOperator to do");
 }
 
+
 function updateNumberA() {
-    numberA = getDisplay().slice(0, getDisplay().indexOf(" "));
+    numberA = getDisplay();
     // to do
-    console.log("updateNumberA to do");
+    console.log("updateNumberA to do: " + numberA);
 }
 
 function updateNumberB() {
+    numberB = getDisplay();
     // to do
-    console.log("updateNumberB to do");
+    console.log("updateNumberB to do: " + numberB);
 }
 
 function getDisplay() {
@@ -63,12 +100,14 @@ function updateMainDisplay(symbol) {
     else
         if (input.length < 11)
             bigDisplay.textContent = input + symbol;
-    updateNumberA();
     console.log("updateMainDisplay: " + getDisplay());
 }
 
 function updateSupportDisplay(text) {
-    // to do
+    if (numberA != null)
+        smallDisplay.textContent = numberA + " " + firstOperator;
+    else
+        clearSmallDisplay();
     console.log("updateSupportDisplay to do");
 }
 
@@ -88,10 +127,20 @@ function backspace() {
 
 function clearDisplays() {
     smallDisplay.innerHTML = "\&nbsp;";
-    bigDisplay.textContent = 0;
-    numberA = 0;
-    numberB = 0;
-    result = 0;
+    bigDisplay.textContent = "0";
+    numberA = null;
+    numberB = null;
+    result = null;
+    firstOperator = "";
+    secondOperator = "";
+}
+
+function clearBigDisplay() {
+    bigDisplay.textContent = "";
+}
+
+function clearSmallDisplay() {
+    smallDisplay.textContent = "";
 }
 
 const buttons = document.querySelectorAll("button");
