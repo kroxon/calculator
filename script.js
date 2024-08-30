@@ -3,7 +3,6 @@ let numberA = null;
 let numberB = null;
 let result = null;
 let firstOperator = "";
-let secondOperator = "";
 
 const bigDisplay = document.querySelector(".main");
 const smallDisplay = document.querySelector(".support");
@@ -23,7 +22,11 @@ function operate() {
             result = numberA * numberB;
             break;
         case '÷':
-            result = numberA / numberB;
+            if (numberB === 0) {
+                alert("Don't divide by 0!");
+                break;
+            } else
+                result = numberA / numberB;
             break;
     }
     result = formatResult(result);
