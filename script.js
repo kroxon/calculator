@@ -92,7 +92,7 @@ function getDisplay() {
 function updateMainDisplay(symbol) {
     let input = getDisplay();
     if (symbol === ".") {
-        if (input === "0")
+        if (input === "0" || input === "")
             bigDisplay.textContent = "0.";
         else if (!input.includes("."))
             bigDisplay.textContent = input + ".";
